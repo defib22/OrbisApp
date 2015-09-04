@@ -1,0 +1,51 @@
+//
+//  OrbisApp-Prefix.pch
+//  OrbisApp
+//
+//  Created by Kuldeep Saini on 28/08/15.
+//  Copyright (c) 2015 bansalOrg. All rights reserved.
+//
+
+#ifndef OrbisApp_OrbisApp_Prefix_pch
+#define OrbisApp_OrbisApp_Prefix_pch
+
+#import "UIColor+Expanded.h"
+#import "DejalActivityView.h"
+#import "ConnectionManager.h"
+#import "AppSettings.h"
+#import "AppDelegate.h"
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+#define APP_DELEGATE ((AppDelegate*)[[UIApplication sharedApplication] delegate])
+#define CLEAR_COLOR [UIColor clearColor]
+
+#define APP_TEXT_COLOR [UIColor blackColor]
+
+#define FONT_SYNCOPATE_REGULAR(xx) [UIFont fontWithName:@"Syncopate-Regular" size:xx]
+#define FONT_SYNCOPATE_BOLD(xx) [UIFont fontWithName:@"Syncopate-Bold" size:xx]
+
+
+#define FONT_TitilliumWeb_Black(xx) [UIFont fontWithName:@"TitilliumWeb-Black" size:xx]
+#define FONT_TitilliumWeb_Bold(xx) [UIFont fontWithName:@"TitilliumWeb-Bold" size:xx]
+#define FONT_TitilliumWeb_ExtraLight(xx) [UIFont fontWithName:@"TitilliumWeb-ExtraLight" size:xx]
+#define FONT_TitilliumWeb_Light(xx) [UIFont fontWithName:@"TitilliumWeb-Light" size:xx]
+#define FONT_TitilliumWeb_Regular(xx) [UIFont fontWithName:@"TitilliumWeb-Regular" size:xx]
+#define FONT_TitilliumWeb_SemiBold(xx) [UIFont fontWithName:@"TitilliumWeb-SemiBold" size:xx]
+
+
+
+
+#define YELLOW_COLOR [UIColor colorWithRed:253.0/255.0 green:207.0/255.0 blue:9.0/255.0 alpha:1.0]
+
+#define NAV_BG_COLOR [UIColor colorWithRed:236.0/255.0 green:242.0/255.0 blue:249.0/255.0 alpha:1.0]
+
+
+#define kNotificationFromLeftMenuForMerchant @"kNotificationFromLeftMenuForMerchant"
+
+#define DUMMY_TEXT @"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+
+
+#endif
