@@ -9,6 +9,7 @@
 #import "RateCardViewController.h"
 
 @interface RateCardViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *bikeImageView;
 
 @end
 
@@ -17,6 +18,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    NSString *imageName=  @"";
+    switch (self.RATE_CARD_FOR) {
+        case BIKE_NOW:
+            imageName= @"bike_now";
+            break;
+        case CAR_SHARE:
+            imageName=@"car_share";
+            break;
+        case CAR_NOW:
+            imageName=@"car_now";
+            break;
+            
+        default:
+            break;
+    }
+    self.bikeImageView.image = [UIImage imageNamed:imageName];
+    [super viewWillAppear:animated];
+}
+- (IBAction)btnCrossClicked:(UIButton *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -35,6 +35,7 @@
     lblFrom_To.text = [path uppercaseString];
     lblFrom_To.textAlignment = NSTextAlignmentCenter;
     lblFrom_To.font =FONT_TitilliumWeb_SemiBold(14.0);
+    lblFrom_To.textColor = APP_TEXT_COLOR;
     lblFrom_To.backgroundColor = [UIColor clearColor];
     [self addSubview:lblFrom_To];
     
@@ -44,16 +45,18 @@
     lblHeader.text = @"";
     lblHeader.textAlignment = NSTextAlignmentCenter;
     lblHeader.font =FONT_TitilliumWeb_SemiBold(12.0);
+    lblHeader.textColor = APP_TEXT_COLOR;
     lblHeader.backgroundColor = [UIColor clearColor];
     [self addSubview:lblHeader];
 
     yPos+=lblHeader.frame.size.height;
     
-    lblDesc = [[UILabel alloc] initWithFrame:CGRectMake(5, yPos, CGRectGetWidth(self.frame)-10, 20)];
+    lblDesc = [[UILabel alloc] initWithFrame:CGRectMake(10, yPos, CGRectGetWidth(self.frame)-25, 40)];
     lblDesc.text = desc;
-    lblDesc.numberOfLines = 0;
+    lblDesc.numberOfLines = 2;
     lblDesc.textAlignment = NSTextAlignmentCenter;
     lblDesc.font =FONT_TitilliumWeb_Regular(12.0);
+    lblDesc.textColor = APP_TEXT_COLOR;
     lblDesc.backgroundColor = [UIColor clearColor];
     [self addSubview:lblDesc];
 
@@ -85,6 +88,7 @@
     lblHeader.textAlignment = NSTextAlignmentCenter;
     lblHeader.userInteractionEnabled = YES;
     lblHeader.font =FONT_TitilliumWeb_Regular(12.0);
+    lblHeader.textColor = APP_TEXT_COLOR;
     lblHeader.backgroundColor = [UIColor clearColor];
     [self addSubview:lblHeader];
     
@@ -94,6 +98,7 @@
     lblDesc.userInteractionEnabled = YES;
     lblDesc.textAlignment = NSTextAlignmentCenter;
     lblDesc.font =FONT_TitilliumWeb_Regular(8.0);
+    lblDesc.textColor = APP_TEXT_COLOR;
     lblDesc.backgroundColor = [UIColor clearColor];
     lblDesc.textColor = [UIColor redColor];
     [self addSubview:lblDesc];

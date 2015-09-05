@@ -34,7 +34,7 @@
 {
     UIView *vwHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 300)];
     
-    UITextView *txtVw = [[UITextView alloc] initWithFrame:CGRectMake(20, 10, CGRectGetWidth(self.view.frame)-40, 250)];
+    UITextView *txtVw = [[UITextView alloc] initWithFrame:CGRectMake(20, 23, CGRectGetWidth(self.view.frame)-40, 250)];
     txtVw.text = DUMMY_TEXT;
     txtVw.scrollEnabled = NO;
     txtVw.font = FONT_TitilliumWeb_Regular(14.0);

@@ -11,6 +11,12 @@
 
 #import "AppDelegate.h"
 
+typedef enum{
+    CROSS_ACTION = 900,
+    PROFILE_ACTION,
+    
+}Right_Buttton_Action_Type;
+
 
 #define NSBUNDLE_IMAGE(NAME) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle]pathForResource:NAME ofType:@"png"]]
 

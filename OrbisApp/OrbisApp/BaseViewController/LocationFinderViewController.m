@@ -34,7 +34,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.title = self.isForDropOff ? @"DROP OFF LOCATION" : @"PICKUP LOCATION";
     
-    CGFloat yPos = 70;
+    CGFloat yPos = 87;
     
     txtFldSearchBar = [[UITextField alloc] initWithFrame:CGRectMake(20, yPos, CGRectGetWidth(self.view.frame)-40, 40)];
     txtFldSearchBar.borderStyle = UITextBorderStyleRoundedRect;
@@ -44,6 +44,7 @@
     txtFldSearchBar.rightView =  [self prepareLeftViewWithImage:@""];
     txtFldSearchBar.rightViewMode = UITextFieldViewModeAlways;
     [self.view addSubview:txtFldSearchBar];
+    
     
     yPos+=txtFldSearchBar.frame.size.height+10;
     

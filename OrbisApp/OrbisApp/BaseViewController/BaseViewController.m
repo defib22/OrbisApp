@@ -9,6 +9,7 @@
 #import "BaseViewController.h"
 #import "AppDelegate.h"
 #import "Constants.h"
+#import "ProfileViewController.h"
 
 @interface BaseViewController ()
 {
@@ -42,13 +43,38 @@
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
     
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"top_side_menu"]
-                                                                         style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"top_side_menu"] style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
+    revealButtonItem.tintColor = APP_TEXT_COLOR;
+    
     
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     
 }
 
+-(void) setUpRightBarButtonItemWithImageName:(NSString *)imageName andActionType:(Right_Buttton_Action_Type)actionType{
+    SEL selectorName = @selector(backBtnClicked);
+    switch (actionType) {
+        case PROFILE_ACTION:
+            selectorName = @selector(openProfileViewController);
+            break;
+        case CROSS_ACTION:
+            selectorName  = @selector(backBtnClicked);
+            break;
+        default:
+            break;
+    }
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:imageName] style:UIBarButtonItemStylePlain target:self action:selectorName];
+    revealButtonItem.tintColor = APP_TEXT_COLOR;
+    
+    
+    self.navigationItem.rightBarButtonItem = revealButtonItem;
+}
+
+-(void)openProfileViewController{
+    UIStoryboard *st  = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ProfileViewController *vwCont = [st instantiateViewControllerWithIdentifier:@"ProfileViewController"];
+    [self.navigationController pushViewController:vwCont animated:YES];
+}
 
 -(void)showAlertViewWithTitle:(NSString*)title andBody:(NSString*)body andDelegate:(id)delegate
 {
@@ -80,35 +106,13 @@
     
     UILabel *lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, isIOS7 ? 20 : 0, CGRectGetWidth(self.view.bounds), 44)];
     lblTitle.backgroundColor = [UIColor clearColor];
-    lblTitle.textColor = [UIColor blackColor];
+    lblTitle.textColor = APP_TEXT_COLOR;
     lblTitle.font = FONT_TitilliumWeb_Light(16.0);
     lblTitle.numberOfLines = 2;
     lblTitle.text = title;
     lblTitle.textAlignment = NSTextAlignmentCenter;
     [imgTopNavBar addSubview:lblTitle];
     imgTopNavBar = nil;
-    
-  /*  if(isRightBtn)
-    {
-        UIButton *leftMenuBtn = [self designAButtonWithFrame:CGRectMake(315-70, isIOS7 ? 23:7, 64, 28) withTag:MENU_BTN_TAG withNormalImg:@"green_btn" withSelectedImage:@"gray_btn" withTitle:rightBtnTitle];
-        [leftMenuBtn setBackgroundImage:NSBUNDLE_IMAGE(@"gray_btn") forState:UIControlStateHighlighted];
-        leftMenuBtn.titleLabel.font = [UIFont systemFontOfSize:14.0];
-        [leftMenuBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [leftMenuBtn addTarget:self action:@selector(leftMenuBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:leftMenuBtn];
-        leftMenuBtn = nil;
-    }
-    
-    if(isMenuBtn)
-    {
-        UIButton *btnMenu = [self designAButtonWithFrame:CGRectMake(15.0, isIOS7 ? 20.0:7.0, 32.0, 32.0) withTag:MENU_BTN_TAG withNormalImg:@"the_menu" withSelectedImage:@"the_menu" withTitle:@""];//mnuBtnTitle
-        [btnMenu setBackgroundImage:NSBUNDLE_IMAGE(@"the_menu") forState:UIControlStateHighlighted];
-        btnMenu.titleLabel.font = [UIFont systemFontOfSize:14.0];
-        [btnMenu setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [btnMenu addTarget:self action:@selector(menuBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:btnMenu];
-        btnMenu = nil;
-    }*/
 }
 
 -(void)designBarNavigationLeftButton:(BOOL)isBackButton{
@@ -129,10 +133,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 -(UIImageView*)prepareLeftViewWithImage:(NSString*)imgName
 {
     UIImageView *leftvwImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 30, 30)];
@@ -141,12 +141,17 @@
     return leftvwImage;
 }
 
-
 -(UIImageView*)addSeparatorWithFrame:(CGRect)frame
 {
     UIImageView *imgSep = [[UIImageView alloc] initWithFrame:frame];
     imgSep.backgroundColor = [UIColor lightGrayColor];
     return imgSep;
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 

@@ -10,7 +10,6 @@
 #import "Constants.h"
 
 @interface ForgotPasswordViewController ()
-@property (weak, nonatomic) IBOutlet UIView *pswdResetView;
 
 @end
 
@@ -20,10 +19,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"FORGOT PASSWORD";
-
-//    [self designNavigationBarWithTitle:@"FORGOT PASSWORD"];
-//    [self designBarNavigationLeftButton:YES];
-//    [self.navigationController setNavigationBarHidden:YES];
     
     UIImageView *leftvwImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 30, 30)];
     leftvwImage.image = [UIImage imageNamed:@"mail_ic"];
@@ -36,17 +31,6 @@
     return YES;
 }
 
-- (IBAction)btnResetPswdClicked:(UIButton *)sender {
-    self.pswdResetView.hidden = NO;
-    UIImageView *imgVw = (UIImageView *)[self.view viewWithTag:TOP_NAV_BAR];
-    [imgVw setHidden:YES];
-    
-    UIButton *btn = (UIButton *)[self.view viewWithTag:NAV_BAR_LEFT_BTN_TAG];
-    [btn setHidden:YES];
-}
-- (IBAction)btnOkClicked:(UIButton *)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

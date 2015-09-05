@@ -21,4 +21,6 @@
 -(UIImageView*)prepareLeftViewWithImage:(NSString*)imgName;
 -(UIImageView*)addSeparatorWithFrame:(CGRect)frame;
 
+-(void) setUpRightBarButtonItemWithImageName:(NSString *)imageName andActionType:(Right_Buttton_Action_Type)actionType;
+
 @end

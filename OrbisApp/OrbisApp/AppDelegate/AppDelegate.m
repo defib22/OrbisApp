@@ -38,7 +38,7 @@
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav_bar"] forBarMetrics:UIBarMetricsDefault];
     
     //    [[UINavigationBar appearance]setBarTintColor:BLUE_COLOR];
-    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor], NSForegroundColorAttributeName,
+    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:APP_TEXT_COLOR, NSForegroundColorAttributeName,
                                                            FONT_TitilliumWeb_Regular(18), NSFontAttributeName, nil]];
     //    [[UINavigationBar appearance] setTintColor:WHITE_COLOR];
     

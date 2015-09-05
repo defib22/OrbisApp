@@ -8,6 +8,7 @@
 
 #import "HelpViewController.h"
 #import "TutorialViewController.h"
+
 @interface HelpViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
     NSMutableArray *arrTableData;
@@ -28,7 +29,7 @@
 }
 -(UIView*)designHeaderView
 {
-    UIView *vwHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 40)];
+    UIView *vwHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 50)];
     
     
 //    UILabel *lblHeader = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, vwHeader.frame.size.width-20, 30)];

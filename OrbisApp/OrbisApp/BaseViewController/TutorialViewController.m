@@ -54,7 +54,7 @@
     self.navigationController.navigationBar.shadowImage = nil;
     self.navigationController.navigationBar.translucent = NO;
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav_bar"] forBarMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor], NSForegroundColorAttributeName,
+    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:APP_TEXT_COLOR, NSForegroundColorAttributeName,
                                                            FONT_TitilliumWeb_Regular(18), NSFontAttributeName, nil]];
     
 }

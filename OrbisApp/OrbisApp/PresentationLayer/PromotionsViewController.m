@@ -23,7 +23,7 @@
     
     self.title = @"PROMOTIONS";
     
-    txtFldPromotions = [[UITextField alloc] initWithFrame:CGRectMake(20, 70, CGRectGetWidth(self.view.frame)-40, 40)];
+    txtFldPromotions = [[UITextField alloc] initWithFrame:CGRectMake(20, 87, CGRectGetWidth(self.view.frame)-40, 40)];
     txtFldPromotions.borderStyle = UITextBorderStyleRoundedRect;
     txtFldPromotions.delegate = self;
     txtFldPromotions.placeholder = @"Promo Code";
@@ -34,7 +34,7 @@
     [self.view addSubview:txtFldPromotions];
     
     UIButton *btnApply = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnApply.frame = CGRectMake((CGRectGetWidth(self.view.frame)/2)-75, 130, 150, 40);
+    btnApply.frame = CGRectMake((CGRectGetWidth(self.view.frame)/2)-75, 147, 150, 45);
     [btnApply setTitleColor:APP_TEXT_COLOR forState:UIControlStateNormal];
     [btnApply setTitle:@"APPLY" forState:UIControlStateNormal];
     btnApply.titleLabel.font = FONT_TitilliumWeb_SemiBold(15.0);

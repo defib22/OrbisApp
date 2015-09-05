@@ -159,7 +159,7 @@
     yCordinate+=50;
 
     
-    vwFromAdd = [[AddressButtonView alloc] initWithFrame:CGRectMake(xPos, yCordinate, width, 70)];
+    vwFromAdd = [[AddressButtonView alloc] initWithFrame:CGRectMake(xPos, yCordinate, width, 85)];
     [vwFromAdd designInterfaceWithLocationFrom:@"From" andDesc:@"1120 San Fernando Rd. lendale, CA"];
     vwFromAdd.lblHeader.text = @"Fantasy Flowers";
     [vwFromAdd addTarget:self action:@selector(addressButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -167,27 +167,27 @@
     
     xPos+=width;
     
-    [self.view addSubview:[self addSeparatorWithFrame:CGRectMake(xPos, yCordinate, 1, 70)]];
+    [self.view addSubview:[self addSeparatorWithFrame:CGRectMake(xPos, yCordinate, 1, 85)]];
     UIImageView *imageYelArrow = [[UIImageView alloc] initWithFrame:CGRectMake(xPos-10, yCordinate+25, 20, 20)];
     imageYelArrow.contentMode = UIViewContentModeCenter;
     imageYelArrow.image = [UIImage imageNamed:@"yelarrow"];
     [self.view addSubview:imageYelArrow];
 
     
-    vwToAdd = [[AddressButtonView alloc] initWithFrame:CGRectMake(xPos, yCordinate, width, 70)];
+    vwToAdd = [[AddressButtonView alloc] initWithFrame:CGRectMake(xPos, yCordinate, width, 85)];
     [vwToAdd designInterfaceWithLocationFrom:@"To" andDesc:@"12133 Ventura Blvd, Sherman Oaks, CA"];
     [vwToAdd addTarget:self action:@selector(addressButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:vwToAdd];
     
-    [self.view addSubview:[self addSeparatorWithFrame:CGRectMake(0, yCordinate+70, CGRectGetWidth(self.view.frame), 1)]];
+    [self.view addSubview:[self addSeparatorWithFrame:CGRectMake(0, yCordinate+85, CGRectGetWidth(self.view.frame), 1)]];
     
-    yCordinate+=80;
+    yCordinate+=93;
 
     
     UIButton *btnNext = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnNext setBackgroundImage:[UIImage imageNamed:@"yellow_btn"] forState:UIControlStateNormal];
     [btnNext setTitle:@"REQUEST CARNOW" forState:UIControlStateNormal];
-    [btnNext setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btnNext setTitleColor:APP_TEXT_COLOR forState:UIControlStateNormal];
     btnNext.titleLabel.font = FONT_TitilliumWeb_Regular(22.0);
     [btnNext addTarget:self action:@selector(btnReqNowClicked:) forControlEvents:1];
     btnNext.frame = CGRectMake(20, yCordinate, CGRectGetWidth(self.view.frame)-40, 50);

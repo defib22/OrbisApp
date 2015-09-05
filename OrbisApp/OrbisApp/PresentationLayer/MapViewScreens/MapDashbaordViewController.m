@@ -22,9 +22,11 @@
 #import "PaymentViewController.h"
 #import "TutorialViewController.h"
 #import "HelpViewController.h"
+#import "ProfileViewController.h"
 
 #import "ConfirmationBookingViewController.h"
 #import "LocationFinderViewController.h"
+#import "RateCardViewController.h"
 
 @interface MapDashbaordViewController ()<MKMapViewDelegate>
 {
@@ -33,6 +35,7 @@
     AddressButtonView *vwToAdd;
     
     UILabel *lblEstimatedTime;
+    BOOL isBtnSelectedFirstTime;
     
 }
 @end
@@ -46,7 +49,7 @@
     self.title = @"ORBIS";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(navigateToRespectiveController:) name:kNotificationFromLeftMenuForMerchant object:nil];
-
+    isBtnSelectedFirstTime = YES;
     [self designInterface];
     
 }
@@ -55,9 +58,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    
+
     [self setUpSlideControllerOptions];
+    [self setUpRightBarButtonItemWithImageName:@"top_profile_ic" andActionType:PROFILE_ACTION];
 
 }
 
@@ -118,7 +121,7 @@
     
     [self designButtonsForSourceAndDestinationAddress];
     
-    yCordinate+=100;
+    yCordinate+=97;
     
     [self addNextButtonAtBottomAtPosition:yCordinate];
     
@@ -136,14 +139,15 @@
 
     CGFloat xPos = 0;
     
-    vwFromAdd = [[AddressButtonView alloc] initWithFrame:CGRectMake(xPos, yCordinate, width, 70)];
+    vwFromAdd = [[AddressButtonView alloc] initWithFrame:CGRectMake(xPos, yCordinate, width, 85)];
+    vwFromAdd.backgroundColor = [UIColor clearColor];
     [vwFromAdd designInterfaceWithLocationFrom:@"From" andDesc:@"Tap to select source address."];
     [vwFromAdd addTarget:self action:@selector(addressButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:vwFromAdd];
     
     xPos+=width;
     
-    [self.view addSubview:[self addSeparatorWithFrame:CGRectMake(xPos, yCordinate, 1, 70)]];
+    [self.view addSubview:[self addSeparatorWithFrame:CGRectMake(xPos, yCordinate, 1, 85)]];
     
     UIImageView *imageYelArrow = [[UIImageView alloc] initWithFrame:CGRectMake(xPos-10, yCordinate+25, 20, 20)];
     imageYelArrow.contentMode = UIViewContentModeCenter;
@@ -151,12 +155,12 @@
     [self.view addSubview:imageYelArrow];
 
     
-    vwToAdd = [[AddressButtonView alloc] initWithFrame:CGRectMake(xPos, yCordinate, width, 70)];
+    vwToAdd = [[AddressButtonView alloc] initWithFrame:CGRectMake(xPos, yCordinate, width, 85)];
     [vwToAdd designInterfaceWithLocationFrom:@"To" andDesc:@"Tap to select destination address."];
     [vwToAdd addTarget:self action:@selector(addressButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:vwToAdd];
     
-    [self.view addSubview:[self addSeparatorWithFrame:CGRectMake(0, yCordinate+70, CGRectGetWidth(self.view.frame), 1)]];
+    [self.view addSubview:[self addSeparatorWithFrame:CGRectMake(0, yCordinate+85, CGRectGetWidth(self.view.frame), 1)]];
     
 
     
@@ -167,7 +171,7 @@
     UIButton *btnNext = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnNext setBackgroundImage:[UIImage imageNamed:@"yellow_btn"] forState:UIControlStateNormal];
     [btnNext setTitle:@"NEXT" forState:UIControlStateNormal];
-    [btnNext setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btnNext setTitleColor:APP_TEXT_COLOR forState:UIControlStateNormal];
     btnNext.titleLabel.font = FONT_TitilliumWeb_Regular(22.0);
     [btnNext addTarget:self action:@selector(btnNextClicked:) forControlEvents:1];
     btnNext.frame = CGRectMake(20, yPos, CGRectGetWidth(self.view.frame)-40, 50);
@@ -197,7 +201,7 @@
     [btnTextDriver addTarget:self action:@selector(btnTextDriverClicked) forControlEvents:UIControlEventTouchUpInside];
     [btnTextDriver setBackgroundImage:[UIImage imageNamed:@"gray_btn"] forState:UIControlStateNormal];
     [btnTextDriver setTitle:@"TEXT DRIVER" forState:UIControlStateNormal];
-    [btnTextDriver setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btnTextDriver setTitleColor:APP_TEXT_COLOR forState:UIControlStateNormal];
     btnTextDriver.titleLabel.font = FONT_TitilliumWeb_Regular(16.0);
 
     btnTextDriver.frame = CGRectMake(xPos, yCord, width, 40);
@@ -241,7 +245,7 @@
         [btnBackground setFrame:CGRectMake(xPos, 0, width, 35)];
         [btnBackground setBackgroundImage:nil forState:UIControlStateNormal];
         [btnBackground setBackgroundImage:[UIImage imageNamed:@"maptabs"] forState:UIControlStateSelected];
-        [btnBackground setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btnBackground setTitleColor:APP_TEXT_COLOR forState:UIControlStateNormal];
         btnBackground.titleLabel.font = FONT_TitilliumWeb_Regular(12.0);
         
         NSMutableAttributedString *myString = nil;
@@ -304,6 +308,7 @@
         [imgBG addSubview:btnBackground];
         [btnBackground addTarget:self action:@selector(vwButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
          if(i==0){
+             isBtnSelectedFirstTime = YES;
              [self vwButtonClicked:btnBackground];
          }
          xPos+=width;
@@ -317,6 +322,10 @@
     if(lblEstimatedTime){
         [lblEstimatedTime removeFromSuperview];
         lblEstimatedTime = nil;
+    }
+    
+    if (sender.selected == YES) {
+        isBtnSelectedFirstTime = NO;
     }
     
     CGRect frame = sender.bounds;
@@ -340,22 +349,31 @@
     btnThree.selected = NO;
     
     
-    switch (sender.tag) {
-        case 200:
-            sender.selected = YES;
-            
-            break;
-        case 201:
-            sender.selected = YES;
-            
-            break;
-        case 202:
-            sender.selected = YES;
-            
-            break;
-        default:
-            break;
-    }
+    int RateCardType = 100;
+        switch (sender.tag) {
+            case 200:
+                sender.selected = YES;
+                RateCardType = 100;
+                break;
+            case 201:
+                sender.selected = YES;
+                RateCardType = 101;
+                break;
+            case 202:
+                sender.selected = YES;
+                RateCardType = 102;
+                break;
+            default:
+                break;
+        }
+    
+        if (sender.selected == YES && !isBtnSelectedFirstTime) {
+            isBtnSelectedFirstTime = YES;
+            UIStoryboard *st = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            RateCardViewController *vwCtrlr = [st instantiateViewControllerWithIdentifier:@"RateCardViewController"];
+            vwCtrlr.RATE_CARD_FOR = RateCardType;
+            [self presentViewController:vwCtrlr animated:YES completion:nil];
+        }
     
 }
 
@@ -431,6 +449,9 @@
     switch (selectedRow) {
         case 0:
         {
+            UIStoryboard *st  = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            ProfileViewController *vwCont = [st instantiateViewControllerWithIdentifier:@"ProfileViewController"];
+            [self.navigationController pushViewController:vwCont animated:YES];
         }
             break;
         case 1:
@@ -443,7 +464,8 @@
             break;
         case 2:
         {
-            TrackingViewController *vwCont = [[TrackingViewController alloc] init];
+            UIStoryboard *st  = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            TrackingViewController *vwCont = [st instantiateViewControllerWithIdentifier:@"TrackingViewController"];
             [self.navigationController pushViewController:vwCont animated:YES];
         }
             

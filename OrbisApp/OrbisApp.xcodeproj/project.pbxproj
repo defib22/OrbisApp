@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3124E4FB1B975DB40049E779 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124E4FA1B975DB40049E779 /* ForgotPasswordViewController.m */; };
 		312F52191B95BE50009E956E /* LaunchScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 312F52181B95BE50009E956E /* LaunchScreenViewController.m */; };
+		3139D9321B9AC5360064E17A /* ResetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3139D9311B9AC5360064E17A /* ResetPasswordViewController.m */; };
+		315233E61B9B28000017D5A5 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 315233E51B9B28000017D5A5 /* ProfileViewController.m */; };
 		31A098E11B90DFE900EFBDC1 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A098E01B90DFE900EFBDC1 /* LoginViewController.m */; };
 		930DB9C21B8A359D002C5A2F /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 930DB9C11B8A359D002C5A2F /* BaseViewController.m */; };
 		9382567D1B8A18F20097B595 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382567C1B8A18F20097B595 /* main.m */; };
@@ -77,6 +79,10 @@
 		3124E4FA1B975DB40049E779 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
 		312F52171B95BE50009E956E /* LaunchScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchScreenViewController.h; sourceTree = "<group>"; };
 		312F52181B95BE50009E956E /* LaunchScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchScreenViewController.m; sourceTree = "<group>"; };
+		3139D9301B9AC5360064E17A /* ResetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPasswordViewController.h; sourceTree = "<group>"; };
+		3139D9311B9AC5360064E17A /* ResetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPasswordViewController.m; sourceTree = "<group>"; };
+		315233E41B9B28000017D5A5 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		315233E51B9B28000017D5A5 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		31A098DF1B90DFE900EFBDC1 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = "SignUp:Login/LoginViewController.h"; sourceTree = "<group>"; };
 		31A098E01B90DFE900EFBDC1 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = "SignUp:Login/LoginViewController.m"; sourceTree = "<group>"; };
 		930DB9C01B8A359D002C5A2F /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -298,6 +304,10 @@
 				312F52181B95BE50009E956E /* LaunchScreenViewController.m */,
 				3124E4F91B975DB40049E779 /* ForgotPasswordViewController.h */,
 				3124E4FA1B975DB40049E779 /* ForgotPasswordViewController.m */,
+				3139D9301B9AC5360064E17A /* ResetPasswordViewController.h */,
+				3139D9311B9AC5360064E17A /* ResetPasswordViewController.m */,
+				315233E41B9B28000017D5A5 /* ProfileViewController.h */,
+				315233E51B9B28000017D5A5 /* ProfileViewController.m */,
 			);
 			path = PresentationLayer;
 			sourceTree = "<group>";
@@ -314,27 +324,27 @@
 			children = (
 				AE875C031B95D96400583557 /* AppSettings.h */,
 				AE875C041B95D96400583557 /* AppSettings.m */,
-				AE875C051B95D96400583557 /* UIColor+Expanded.h */,
-				AE875C061B95D96400583557 /* UIViewController+ImageBackButton.h */,
-				AE875C071B95D96400583557 /* UIViewController+ImageBackButton.m */,
-				AE875C081B95D96400583557 /* TitilliumWeb-Black.ttf */,
-				AE875C091B95D96400583557 /* TitilliumWeb-Light.ttf */,
-				AE875C0A1B95D96400583557 /* TitilliumWeb-Bold.ttf */,
-				AE875C0B1B95D96400583557 /* TitilliumWeb-ExtraLight.ttf */,
-				AE875C0C1B95D96400583557 /* TitilliumWeb-Regular.ttf */,
-				AE875C0D1B95D96400583557 /* TitilliumWeb-SemiBold.ttf */,
-				AE875C0E1B95D96400583557 /* Reachability.h */,
-				AE875C0F1B95D96400583557 /* Reachability.m */,
-				AE875C101B95D96400583557 /* Syncopate-Bold.ttf */,
-				AE875C111B95D96400583557 /* Syncopate-Regular.ttf */,
 				AE875C121B95D96400583557 /* ConnectionManager.h */,
 				AE875C131B95D96400583557 /* ConnectionManager.m */,
+				938256AC1B8A1AA90097B595 /* Constants.h */,
 				AE875C141B95D96400583557 /* DejalActivityView.h */,
 				AE875C151B95D96400583557 /* DejalActivityView.m */,
-				AE875C161B95D96400583557 /* UIColor+Expanded.m */,
 				AE875C021B95D8FD00583557 /* OrbisApp-Prefix.pch */,
-				938256AC1B8A1AA90097B595 /* Constants.h */,
+				AE875C0E1B95D96400583557 /* Reachability.h */,
+				AE875C0F1B95D96400583557 /* Reachability.m */,
 				938256AD1B8A1ACB0097B595 /* StyleKit.h */,
+				AE875C101B95D96400583557 /* Syncopate-Bold.ttf */,
+				AE875C111B95D96400583557 /* Syncopate-Regular.ttf */,
+				AE875C081B95D96400583557 /* TitilliumWeb-Black.ttf */,
+				AE875C0A1B95D96400583557 /* TitilliumWeb-Bold.ttf */,
+				AE875C0B1B95D96400583557 /* TitilliumWeb-ExtraLight.ttf */,
+				AE875C091B95D96400583557 /* TitilliumWeb-Light.ttf */,
+				AE875C0C1B95D96400583557 /* TitilliumWeb-Regular.ttf */,
+				AE875C0D1B95D96400583557 /* TitilliumWeb-SemiBold.ttf */,
+				AE875C051B95D96400583557 /* UIColor+Expanded.h */,
+				AE875C161B95D96400583557 /* UIColor+Expanded.m */,
+				AE875C061B95D96400583557 /* UIViewController+ImageBackButton.h */,
+				AE875C071B95D96400583557 /* UIViewController+ImageBackButton.m */,
 				938256AE1B8A1AFD0097B595 /* Utility.h */,
 				938256AF1B8A1AFD0097B595 /* Utility.m */,
 			);
@@ -536,6 +546,7 @@
 				AE875C171B95D96400583557 /* AppSettings.m in Sources */,
 				AE6CBE951B977FB40057F9A6 /* LiceneceViewController.m in Sources */,
 				AE875C3C1B95DB7700583557 /* SWRevealViewController.m in Sources */,
+				3139D9321B9AC5360064E17A /* ResetPasswordViewController.m in Sources */,
 				930DB9C21B8A359D002C5A2F /* BaseViewController.m in Sources */,
 				AE6CBE981B977FB40057F9A6 /* AboutViewController.m in Sources */,
 				AE6CBEA51B977FD00057F9A6 /* FareQuoteViewController.m in Sources */,
@@ -552,6 +563,7 @@
 				AE6CBE9A1B977FB40057F9A6 /* PaymentViewController.m in Sources */,
 				AE875C231B95D96400583557 /* DejalActivityView.m in Sources */,
 				AE0A9F561B8B1E7F00921240 /* HintViewController.m in Sources */,
+				315233E61B9B28000017D5A5 /* ProfileViewController.m in Sources */,
 				AE875C2A1B95DAA500583557 /* CustomAnnotation.m in Sources */,
 				AE0A9F531B8B1E3600921240 /* TutorialViewController.m in Sources */,
 				938256A71B8A1A120097B595 /* AppDelegate.m in Sources */,

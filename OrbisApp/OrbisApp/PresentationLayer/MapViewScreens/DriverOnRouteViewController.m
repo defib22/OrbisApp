@@ -84,7 +84,7 @@
     lblDriverName.text = @"ROBERT";
     lblDriverName.textAlignment = NSTextAlignmentCenter;
     lblDriverName.font = FONT_TitilliumWeb_Regular(14.0);
-    lblDriverName.textColor =[UIColor blackColor];
+    lblDriverName.textColor =APP_TEXT_COLOR;
     [imgBackground addSubview:lblDriverName];
     
     
@@ -94,7 +94,7 @@
     lblStatus.text = @"ARRIVING NOW";
     lblStatus.font = FONT_TitilliumWeb_Regular(14.0);
     lblStatus.textAlignment = NSTextAlignmentCenter;
-    lblStatus.textColor =[UIColor blackColor];
+    lblStatus.textColor =APP_TEXT_COLOR;
     [imgBackground addSubview:lblStatus];
     
     
@@ -117,7 +117,7 @@
     [btnTextDriver addTarget:self action:@selector(btnTextDriverClicked) forControlEvents:UIControlEventTouchUpInside];
     [btnTextDriver setBackgroundImage:[UIImage imageNamed:@"gray_btn"] forState:UIControlStateNormal];
     [btnTextDriver setTitle:@"CANCEL ORDER" forState:UIControlStateNormal];
-    [btnTextDriver setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btnTextDriver setTitleColor:APP_TEXT_COLOR forState:UIControlStateNormal];
     btnTextDriver.titleLabel.font = FONT_TitilliumWeb_Regular(16.0);
     
     btnTextDriver.frame = CGRectMake(xPos, yCordinate, width, 40);

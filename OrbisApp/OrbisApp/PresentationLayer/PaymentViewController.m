@@ -15,6 +15,7 @@
 
     UITableView *tblAboutUS;
     UITextField *txtFldAddPay;
+    UIButton *btnAddPay;
 }
 @end
 
@@ -31,10 +32,10 @@
 }
 -(UIView*)designHeaderView
 {
-    UIView *vwHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 40)];
+    UIView *vwHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 60)];
     
     
-     UILabel *lblHeader = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, vwHeader.frame.size.width-20, 30)];
+     UILabel *lblHeader = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, vwHeader.frame.size.width-20, 30)];
     lblHeader.text = @"Payment Methods";
     lblHeader.textColor = APP_TEXT_COLOR;
     lblHeader.font = FONT_TitilliumWeb_SemiBold(14.0);
@@ -73,14 +74,24 @@
 {
     UIView *vwHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 50)];
     
-    txtFldAddPay = [[UITextField alloc] initWithFrame:CGRectMake(10, 20, CGRectGetWidth(self.view.frame)-20, 40)];
+    btnAddPay = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnAddPay.frame = CGRectMake(10, 20, CGRectGetWidth(self.view.frame)-20, 40);
+    [btnAddPay setBackgroundImage:[UIImage imageNamed:@"fill"] forState:UIControlStateNormal];
+    [btnAddPay setImage:[UIImage imageNamed:@"addpay"] forState:UIControlStateNormal];
+    [btnAddPay setImageEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 270)];
+    [btnAddPay setTitle:@"ADD PAYMENT" forState:UIControlStateNormal];
+    [btnAddPay setTitleEdgeInsets:UIEdgeInsetsMake(0, -120, 0, 70)];
+    [btnAddPay setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    btnAddPay.titleLabel.font = FONT_TitilliumWeb_Regular(14.0);
+    [vwHeader addSubview:btnAddPay];
+/*    txtFldAddPay = [[UITextField alloc] initWithFrame:CGRectMake(10, 20, CGRectGetWidth(self.view.frame)-20, 40)];
     txtFldAddPay.borderStyle = UITextBorderStyleRoundedRect;
     txtFldAddPay.delegate = self;
     txtFldAddPay.placeholder = @"ADD PAYMENT";
     txtFldAddPay.font = FONT_TitilliumWeb_Regular(14.0);
     txtFldAddPay.leftView = [self prepareLeftViewWithImage:@"addpay"];
     txtFldAddPay.leftViewMode = UITextFieldViewModeAlways;
-    [vwHeader addSubview:txtFldAddPay];
+    [vwHeader addSubview:txtFldAddPay];*/
     
     return vwHeader;
 }

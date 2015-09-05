@@ -16,12 +16,51 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"TRACKING";
     // Do any additional setup after loading the view.
+    [self.navigationController.navigationBar setHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UICollectionView Datasource
+// 1
+- (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
+    //NSString *searchTerm = self.searches[section];
+    return 2;
+}
+// 2
+- (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
+    return 1;
+}
+// 3
+- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *cellIdentifier = @"";
+    if(indexPath.section == 0){
+        cellIdentifier = @"CellIdentifier";
+    }else{
+        cellIdentifier = @"Cell";
+    }
+    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor whiteColor];
+    return cell;
+}
+
+#pragma mark – UICollectionViewDelegateFlowLayout
+
+// 1
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+
+    return CGSizeMake(CGRectGetWidth(self.view.bounds)-20,150);
+}
+
+// 3
+- (UIEdgeInsets)collectionView:
+(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(10, 10, 10, 10);
 }
 
 /*
