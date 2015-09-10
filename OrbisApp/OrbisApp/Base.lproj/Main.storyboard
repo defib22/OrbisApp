@@ -1110,7 +1110,7 @@
         <scene sceneID="UeR-AR-uFA">
             <objects>
                 <tableViewController restorationIdentifier="r" storyboardIdentifier="ProfileViewController" id="mZX-Ko-fWS" customClass="ProfileViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="40" sectionFooterHeight="40" id="OyO-WI-Cdj">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="44" sectionFooterHeight="40" id="OyO-WI-Cdj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1129,25 +1129,49 @@
                                                     <color key="textColor" red="0.1215686275" green="0.14901960780000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="TitilliumWeb-Thin" family="Titillium Web" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="mZX-Ko-fWS" id="3Pk-Ue-5LT"/>
+                                                    </connections>
                                                 </textField>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <inset key="separatorInset" minX="50" minY="0.0" maxX="60" maxY="0.0"/>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="xT6-2q-cnZ">
-                                        <rect key="frame" x="0.0" y="84" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xT6-2q-cnZ" id="DHK-EV-rTO">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="gstevens@gmail.com" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T6u-dX-cQe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
+                                                    <rect key="frame" x="0.0" y="45" width="320" height="44"/>
                                                     <color key="textColor" red="0.1215686275" green="0.14901960780000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="TitilliumWeb-Thin" family="Titillium Web" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="mZX-Ko-fWS" id="tta-L6-xKF"/>
+                                                    </connections>
                                                 </textField>
+                                                <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hYF-Fg-tDq">
+                                                    <rect key="frame" x="50" y="45" width="230" height="1"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="receipt_img" translatesAutoresizingMaskIntoConstraints="NO" id="vi2-dK-wrX">
+                                                    <rect key="frame" x="246" y="8" width="64" height="64"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="vi2-dK-wrX" secondAttribute="height" multiplier="1:1" id="deG-Gi-Ylg"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBi-en-ryM">
+                                                    <rect key="frame" x="246" y="62" width="64" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="iBi-en-ryM" secondAttribute="height" multiplier="32:15" id="3oX-rI-pxp"/>
+                                                        <constraint firstAttribute="height" constant="30" id="is0-Mh-VLG"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="TitilliumWeb-Regular" family="Titillium Web" pointSize="12"/>
+                                                    <state key="normal" title="Change">
+                                                        <color key="titleColor" red="0.1215686275" green="0.14901960780000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="iBi-en-ryM" firstAttribute="top" secondItem="hYF-Fg-tDq" secondAttribute="bottom" constant="16" id="7zP-n0-L6k"/>
+                                                <constraint firstAttribute="trailing" secondItem="iBi-en-ryM" secondAttribute="trailing" constant="10" id="Dzh-13-1IY"/>
+                                                <constraint firstAttribute="trailing" secondItem="vi2-dK-wrX" secondAttribute="trailing" constant="10" id="Ji0-Ts-NC8"/>
+                                                <constraint firstItem="vi2-dK-wrX" firstAttribute="top" secondItem="av0-Xu-hFs" secondAttribute="top" constant="8" id="SR9-VJ-OtP"/>
+                                                <constraint firstAttribute="bottom" secondItem="vi2-dK-wrX" secondAttribute="bottom" constant="28.5" id="Wvq-Ui-nEd"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
@@ -1163,6 +1187,9 @@
                                                     <color key="textColor" red="0.1215686275" green="0.14901960780000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="TitilliumWeb-Thin" family="Titillium Web" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="mZX-Ko-fWS" id="NEO-rk-UiE"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -1180,6 +1207,9 @@
                                                     <color key="textColor" red="0.1215686275" green="0.14901960780000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="TitilliumWeb-Thin" family="Titillium Web" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="mZX-Ko-fWS" id="hSc-0x-bm3"/>
+                                                    </connections>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lwB-nf-YXP">
                                                     <rect key="frame" x="270" y="0.0" width="50" height="44"/>
@@ -1222,6 +1252,9 @@
                                                     <color key="textColor" red="0.1215686275" green="0.14901960780000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="TitilliumWeb-Thin" family="Titillium Web" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="mZX-Ko-fWS" id="6TQ-fy-LVv"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -1239,6 +1272,9 @@
                                                     <color key="textColor" red="0.1215686275" green="0.14901960780000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="TitilliumWeb-Thin" family="Titillium Web" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="mZX-Ko-fWS" id="YBj-Sh-Koj"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -1255,6 +1291,9 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                                     <fontDescription key="fontDescription" name="TitilliumWeb-Thin" family="Titillium Web" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="mZX-Ko-fWS" id="7cD-m7-g71"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -1267,44 +1306,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add favorite place" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n7d-So-bGL">
+                                                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add favorite place" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n7d-So-bGL">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                                     <color key="textColor" red="0.1215686275" green="0.14901960780000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="TitilliumWeb-Thin" family="Titillium Web" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="mZX-Ko-fWS" id="Fno-Q9-ta0"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <inset key="separatorInset" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection id="cBd-GC-6aV">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="52" id="T6R-8U-cVE">
-                                        <rect key="frame" x="0.0" y="432" width="320" height="52"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T6R-8U-cVE" id="iEo-lz-mw8">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2c-Sf-VHl">
-                                                    <rect key="frame" x="85" y="3" width="150" height="45"/>
-                                                    <fontDescription key="fontDescription" name="TitilliumWeb-Regular" family="Titillium Web" pointSize="15"/>
-                                                    <state key="normal" title="SIGN OUT" backgroundImage="gray_btn">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="btnSignOutClicked:" destination="mZX-Ko-fWS" eventType="touchUpInside" id="xDx-gT-hXq"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="o2c-Sf-VHl" secondAttribute="centerY" id="Ajw-bt-nbE"/>
-                                                <constraint firstAttribute="centerX" secondItem="o2c-Sf-VHl" secondAttribute="centerX" id="VLA-dD-Jww"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1316,6 +1329,7 @@
                     </tableView>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="tableView" destination="OyO-WI-Cdj" id="DrO-li-jO0"/>
                         <outlet property="txtFldAddFavAdrs" destination="n7d-So-bGL" id="7aK-LP-zSI"/>
                         <outlet property="txtFldDestAdrs" destination="XD5-z9-hLf" id="JE5-ey-f6i"/>
                         <outlet property="txtFldEmail" destination="T6u-dX-cQe" id="EFF-gy-rFT"/>
@@ -1614,7 +1628,6 @@
         <image name="fb_ic" width="37" height="37"/>
         <image name="fill" width="302" height="37"/>
         <image name="forgot_pwd_ic" width="18" height="18"/>
-        <image name="gray_btn" width="145" height="40"/>
         <image name="hint1" width="320" height="530"/>
         <image name="login_bg" width="320" height="568"/>
         <image name="mail_icn_ylw" width="37" height="37"/>

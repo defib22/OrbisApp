@@ -141,7 +141,7 @@
     
     vwFromAdd = [[AddressButtonView alloc] initWithFrame:CGRectMake(xPos, yCordinate, width, 85)];
     vwFromAdd.backgroundColor = [UIColor clearColor];
-    [vwFromAdd designInterfaceWithLocationFrom:@"From" andDesc:@"Tap to select source address."];
+    [vwFromAdd designInterfaceWithLocationFrom:@"From" andDesc:@"Tap to select \n source address."];
     [vwFromAdd addTarget:self action:@selector(addressButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:vwFromAdd];
     
@@ -156,7 +156,7 @@
 
     
     vwToAdd = [[AddressButtonView alloc] initWithFrame:CGRectMake(xPos, yCordinate, width, 85)];
-    [vwToAdd designInterfaceWithLocationFrom:@"To" andDesc:@"Tap to select destination address."];
+    [vwToAdd designInterfaceWithLocationFrom:@"To" andDesc:@"Tap to select \n destination address."];
     [vwToAdd addTarget:self action:@selector(addressButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:vwToAdd];
     

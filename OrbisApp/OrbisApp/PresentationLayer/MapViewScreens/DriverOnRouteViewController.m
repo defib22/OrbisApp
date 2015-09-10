@@ -64,7 +64,7 @@
     [self.view addSubview:imgBackground];
     
     
-    UIImageView *imgDriverPic = [[UIImageView alloc] initWithFrame:CGRectMake(imgBackground.frame.size.width/2 - 30, yCordinate-30, 60 , 60)];
+    UIImageView *imgDriverPic = [[UIImageView alloc] initWithFrame:CGRectMake(width/2 - 28, yCordinate-30, 60 , 60)];
     imgDriverPic.backgroundColor = [UIColor clearColor];
     imgDriverPic.contentMode = UIViewContentModeCenter;
     imgDriverPic.image = [UIImage imageNamed:@"receipt_img"];

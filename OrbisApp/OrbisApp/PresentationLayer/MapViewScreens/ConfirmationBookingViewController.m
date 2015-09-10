@@ -123,13 +123,24 @@
     imgCircle.clipsToBounds = YES;
     [self.view addSubview:imgCircle];
     
+    
+    NSString *yourString = @"ETA\n 12 \nMIN";
+    NSMutableAttributedString *yourAttributedString = [[NSMutableAttributedString alloc] initWithString:yourString];
+    NSString *boldString = @"12";
+    NSRange boldRange = [yourString rangeOfString:boldString];
+
+    
+    
     UILabel *lblTime = [[UILabel alloc] initWithFrame:imgCircle.bounds];
-    lblTime.text = @"ETA\n12\nMIN";
+    //lblTime.text = @"ETA\n12\nMIN";
+    
     lblTime.textAlignment = NSTextAlignmentCenter;
     lblTime.numberOfLines = 0;
     lblTime.backgroundColor = [UIColor clearColor];
     lblTime.textColor = APP_TEXT_COLOR;
     lblTime.font = FONT_TitilliumWeb_Light(10.0);
+    [yourAttributedString addAttribute: NSFontAttributeName value:FONT_TitilliumWeb_Bold(11) range:boldRange];
+    [lblTime setAttributedText: yourAttributedString];
     [imgCircle addSubview:lblTime];
 
     
@@ -158,9 +169,11 @@
 
     yCordinate+=50;
 
+    //*******
+    //City and state will be in 2nd line
     
     vwFromAdd = [[AddressButtonView alloc] initWithFrame:CGRectMake(xPos, yCordinate, width, 85)];
-    [vwFromAdd designInterfaceWithLocationFrom:@"From" andDesc:@"1120 San Fernando Rd. lendale, CA"];
+    [vwFromAdd designInterfaceWithLocationFrom:@"From" andDesc:@"1120 San Fernando Rd. \n Glendale, CA"];
     vwFromAdd.lblHeader.text = @"Fantasy Flowers";
     [vwFromAdd addTarget:self action:@selector(addressButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:vwFromAdd];
@@ -175,7 +188,7 @@
 
     
     vwToAdd = [[AddressButtonView alloc] initWithFrame:CGRectMake(xPos, yCordinate, width, 85)];
-    [vwToAdd designInterfaceWithLocationFrom:@"To" andDesc:@"12133 Ventura Blvd, Sherman Oaks, CA"];
+    [vwToAdd designInterfaceWithLocationFrom:@"To" andDesc:@"12133 Ventura Blvd \n Sherman Oaks, CA"];
     [vwToAdd addTarget:self action:@selector(addressButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:vwToAdd];
     
