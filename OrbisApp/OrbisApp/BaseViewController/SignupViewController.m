@@ -9,7 +9,10 @@
 #import "SignupViewController.h"
 
 @interface SignupViewController ()
+{
+    ConnectionManager *requestManager;
 
+}
 @end
 
 @implementation SignupViewController
@@ -25,6 +28,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    requestManager = [[ConnectionManager alloc] init];
+
     // Do any additional setup after loading the view.
     self.title = @"SIGN UP";
     [self.navigationController setNavigationBarHidden:NO];
@@ -52,6 +58,71 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
     return YES;
+}
+
+
+-(void)doSignup{
+    
+    if(self.txtFldEmail.text.length && self.txtFldFullName.text.length &&  self.txtFldMobile.text.length && self.txtFldPassword.text.length ){
+        
+        if(![self checkEmailValidationForText:self.txtFldEmail.text]){
+            [self showAlertViewWithTitle:nil andBody:@"Please enter valid email address." andDelegate:nil];
+            return;
+        }
+        
+        else if (self.txtFldPassword.text.length <6){
+            [self showAlertViewWithTitle:nil andBody:@"Password should be atleast 6 characters." andDelegate:nil];
+            return;
+        }
+        
+        
+
+        if(APP_DELEGATE.isServerReachable){
+            
+            [DejalBezelActivityView activityViewForView:APP_DELEGATE.window withLabel:LOADER_MESSAGE];
+            
+            NSString *urlSignup = [NSString stringWithFormat:URL_SIGNUP,self.txtFldFullName.text,self.txtFldFullName.text,self.txtFldEmail.text,self.txtFldPassword.text,self.txtFldMobile.text,@"fav place",@"home address",@"business address"];
+            
+            [requestManager hitWebServiceForURLWithPostBlock:NO webServiceURL:urlSignup andTag:REQUEST_SIGNUP completionHandler:^(id object, REQUEST_TYPE tag, NSError *error) {
+                
+                if(object != nil){
+                    [self performSelectorOnMainThread:@selector(responseSucceed:) withObject:object waitUntilDone:YES];
+                }
+                else{
+                    [self performSelectorOnMainThread:@selector(responseFailed:) withObject:error waitUntilDone:YES];
+                }
+            }];
+        }
+        else{
+            [APP_DELEGATE noInternetConnectionAvailable];
+        }
+    }
+    else{
+        [self showAlertViewWithTitle:nil andBody:@"Please enter all required fields" andDelegate:nil];
+        
+    }
+}
+
+-(void)responseSucceed:(id)object
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    
+    if([[object objectForKey:RESPONSE_CODE] integerValue] == SUCCESS_STATUS_CODE_RESPONSE){
+        [self showAlertViewWithTitle:@"Alert" andBody:[object objectForKey:RESPONSE_MESSAGE] andDelegate:nil];
+    }
+    else{
+        [self showAlertViewWithTitle:@"Alert" andBody:[object objectForKey:RESPONSE_MESSAGE] andDelegate:nil];
+    }
+}
+
+-(void)responseFailed:(NSError*)error
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    [self showAlertViewWithTitle:@"Error" andBody:error.localizedDescription ? error.localizedDescription : UNEXPECTED_ERROR_OCCURED andDelegate:nil];
+}
+
+- (IBAction)btnNextClicked:(id)sender {
+    [self doSignup];
 }
 
 - (void)didReceiveMemoryWarning {

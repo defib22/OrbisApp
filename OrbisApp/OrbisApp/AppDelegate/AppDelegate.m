@@ -18,14 +18,14 @@
 
 @implementation AppDelegate
 @synthesize currentLocation;
-
-
-
+@synthesize isServerReachable;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    [self configureReachability];
+
     [self setNavigationBarAppearance];
     
     [self fetchCurrentLocation];
@@ -101,5 +101,56 @@
     self.currentLocation = [locations lastObject];
 
 }
+
+#pragma mark- Reachability
+#pragma mark-
+-(void)configureReachability
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
+    
+    
+    self.serverReachability = [Reachability reachabilityForInternetConnection];
+    [self.serverReachability startNotifier];
+    [self updateInterfaceWithReachability:self.serverReachability];
+}
+
+- (void)reachabilityChanged:(NSNotification*)note
+{
+    Reachability* curReach = [note object];
+    NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+    [self updateInterfaceWithReachability:curReach];
+}
+
+- (void)updateInterfaceWithReachability:(Reachability*)curReach
+{
+    NetworkStatus netStatus = [curReach currentReachabilityStatus];
+    switch (netStatus)
+    {
+        case NotReachable:
+            self.isServerReachable = NO;
+            break;
+        case ReachableViaWWAN:{
+            [[AppSettings sharedInstance] setServerReachability:@"3G"];
+            self.isServerReachable = YES;
+        }
+            break;
+        case ReachableViaWiFi:{
+            [[AppSettings sharedInstance] setServerReachability:@"Wifi"];
+            self.isServerReachable = YES;
+        }
+            break;
+    }
+}
+
+
+-(void)noInternetConnectionAvailable
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ASKME PAY" message:@"This application requires Internet Connection. Please check your connection." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    [alert show];
+    alert = nil;
+}
+
 
 @end

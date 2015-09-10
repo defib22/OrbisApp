@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "Reachability.h"
+
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -15,7 +17,10 @@
 @property (strong, nonatomic) CLLocation *currentLocation;
 @property (strong, nonatomic) UINavigationController *navController;
 
+@property (nonatomic)         BOOL isServerReachable;
+@property (nonatomic, strong) Reachability *serverReachability;
 
+-(void)noInternetConnectionAvailable;
 
 @end
 

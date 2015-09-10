@@ -153,6 +153,26 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(BOOL)checkEmailValidationForText:(NSString*)emailID
+{
+    NSString *emailEx =@"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailExPredicate =[NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailEx];
+    return  [emailExPredicate evaluateWithObject:emailID];
+}
+
+-(BOOL)isValidateMobileNumber:(NSString*)mobileNumber{
+    
+    BOOL isValidate = NO;
+    
+    NSString *phoneRegex = @"^[789]\\d{9}$";
+    NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
+    
+    if(mobileNumber.length == 10 && [phoneTest evaluateWithObject:mobileNumber] ){
+        isValidate = YES;
+    }
+    
+    return isValidate;
+}
 
 
 

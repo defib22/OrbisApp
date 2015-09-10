@@ -23,4 +23,7 @@
 
 -(void) setUpRightBarButtonItemWithImageName:(NSString *)imageName andActionType:(Right_Buttton_Action_Type)actionType;
 
+-(BOOL)checkEmailValidationForText:(NSString*)emailID;
+-(BOOL)isValidateMobileNumber:(NSString*)mobileNumber;
+
 @end

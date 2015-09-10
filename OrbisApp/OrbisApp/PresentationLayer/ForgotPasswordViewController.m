@@ -9,8 +9,9 @@
 #import "ForgotPasswordViewController.h"
 #import "Constants.h"
 
-@interface ForgotPasswordViewController ()
-
+@interface ForgotPasswordViewController (){
+ConnectionManager *requestManager;
+}
 @end
 
 @implementation ForgotPasswordViewController
@@ -20,6 +21,8 @@
     // Do any additional setup after loading the view.
     self.title = @"FORGOT PASSWORD";
     
+    requestManager = [[ConnectionManager alloc] init];
+
     UIImageView *leftvwImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 30, 30)];
     leftvwImage.image = [UIImage imageNamed:@"mail_ic"];
     leftvwImage.contentMode = UIViewContentModeCenter;
@@ -36,6 +39,63 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+-(void)getForgotPasswordLink{
+    
+    if(self.txtFldEmail.text.length ){
+        
+        if(![self checkEmailValidationForText:self.txtFldEmail.text]){
+            [self showAlertViewWithTitle:nil andBody:@"Please enter valid email address." andDelegate:nil];
+            return;
+        }
+        
+        if(APP_DELEGATE.isServerReachable){
+            
+            [DejalBezelActivityView activityViewForView:APP_DELEGATE.window withLabel:LOADER_MESSAGE];
+            
+            NSString *urlLogin = [NSString stringWithFormat:URL_FORGOT_PASSWORD,self.txtFldEmail.text];
+            
+            [requestManager hitWebServiceForURLWithPostBlock:NO webServiceURL:urlLogin andTag:REQUEST_LOGIN completionHandler:^(id object, REQUEST_TYPE tag, NSError *error) {
+                
+                if(object != nil){
+                    [self performSelectorOnMainThread:@selector(responseSucceed:) withObject:object waitUntilDone:YES];
+                }
+                else{
+                    [self performSelectorOnMainThread:@selector(responseFailed:) withObject:error waitUntilDone:YES];
+                }
+            }];
+        }
+        else{
+            [APP_DELEGATE noInternetConnectionAvailable];
+        }
+    }
+    else{
+        [self showAlertViewWithTitle:nil andBody:@"Please enter valid credentials" andDelegate:nil];
+        
+    }
+}
+
+-(void)responseSucceed:(id)object
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    
+    if([[object objectForKey:RESPONSE_CODE] integerValue] == SUCCESS_STATUS_CODE_RESPONSE){
+        
+    }
+    else{
+        [self showAlertViewWithTitle:@"Alert" andBody:[object objectForKey:RESPONSE_MESSAGE] andDelegate:nil];
+    }
+    
+}
+
+-(void)responseFailed:(NSError*)error
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    [self showAlertViewWithTitle:@"Error" andBody:error.localizedDescription ? error.localizedDescription : UNEXPECTED_ERROR_OCCURED andDelegate:nil];
+}
+
+
 
 /*
 #pragma mark - Navigation

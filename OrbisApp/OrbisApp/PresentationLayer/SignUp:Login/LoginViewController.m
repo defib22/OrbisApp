@@ -12,7 +12,9 @@
 #import "RearViewController.h"
 
 @interface LoginViewController ()<SWRevealViewControllerDelegate>
-
+{
+    ConnectionManager *requestManager;
+}
 
 @end
 
@@ -29,6 +31,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    requestManager = [[ConnectionManager alloc] init];
+
     self.title = @"LOGIN";
 
 //    [self designNavigationBarWithTitle:@"LOGIN"];
@@ -49,8 +53,68 @@
 
 - (IBAction)loginBtnClicked:(UIButton *)sender {
   
-    [self setUpMapDashboard];
- }
+    [self doLogin];
+}
+
+
+-(void)doLogin{
+    
+    if(self.txtFldEmail.text.length && self.txtFldPswd.text.length ){
+        
+        if(![self checkEmailValidationForText:self.txtFldEmail.text]){
+            [self showAlertViewWithTitle:nil andBody:@"Please enter valid email address." andDelegate:nil];
+            return;
+        }
+        else if (self.txtFldPswd.text.length <6){
+            [self showAlertViewWithTitle:nil andBody:@"Password should be atleast 6 characters." andDelegate:nil];
+            return;
+        }
+        
+        if(APP_DELEGATE.isServerReachable){
+            [DejalBezelActivityView activityViewForView:APP_DELEGATE.window withLabel:LOADER_MESSAGE];
+            
+            NSString *urlLogin = [NSString stringWithFormat:URL_LOGIN,self.txtFldEmail.text,self.txtFldPswd.text];
+            
+            [requestManager hitWebServiceForURLWithPostBlock:NO webServiceURL:urlLogin andTag:REQUEST_LOGIN completionHandler:^(id object, REQUEST_TYPE tag, NSError *error) {
+                
+                if(object != nil){
+                    [self performSelectorOnMainThread:@selector(responseSucceed:) withObject:object waitUntilDone:YES];
+                }
+                else{
+                    [self performSelectorOnMainThread:@selector(responseFailed:) withObject:error waitUntilDone:YES];
+                }
+            }];
+        }
+        else{
+            [APP_DELEGATE noInternetConnectionAvailable];
+        }
+    }
+    else{
+        [self showAlertViewWithTitle:nil andBody:@"Please enter valid credentials" andDelegate:nil];
+        
+    }
+}
+
+-(void)responseSucceed:(id)object
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    
+    if([[object objectForKey:RESPONSE_CODE] integerValue] == SUCCESS_STATUS_CODE_RESPONSE){
+        [self setUpMapDashboard];
+    }
+    else{
+        [self showAlertViewWithTitle:@"Alert" andBody:[object objectForKey:RESPONSE_MESSAGE] andDelegate:nil];
+    }
+    
+}
+
+-(void)responseFailed:(NSError*)error
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    [self showAlertViewWithTitle:@"Error" andBody:error.localizedDescription ? error.localizedDescription : UNEXPECTED_ERROR_OCCURED andDelegate:nil];
+}
+
+
 
 
 -(void)setUpMapDashboard
@@ -71,6 +135,15 @@
     
     APP_DELEGATE.window.rootViewController = revealController;
 }
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    return YES;
+}
+
+// called when 'return' key pressed. return NO to ignore.
+
+
 
 
 /*

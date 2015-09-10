@@ -26,9 +26,11 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)btnResetPswdClicked:(UIButton *)sender{
-    UIStoryboard *st = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    LoginViewController *ctrlr = [st instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    [self.navigationController popToViewController:ctrlr animated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+//    UIStoryboard *st = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    LoginViewController *ctrlr = [st instantiateViewControllerWithIdentifier:@"LoginViewController"];
+//    [self.navigationController popToViewController:ctrlr animated:YES];
 }
 
 /*
