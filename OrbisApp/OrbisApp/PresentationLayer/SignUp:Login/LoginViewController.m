@@ -100,7 +100,29 @@
     [DejalBezelActivityView removeViewAnimated:YES];
     
     if([[object objectForKey:RESPONSE_CODE] integerValue] == SUCCESS_STATUS_CODE_RESPONSE){
-        [self setUpMapDashboard];
+        if ([[object objectForKey:RESPONSE_MESSAGE] isKindOfClass:[NSString class]]) {
+            [self showAlertViewWithTitle:@"Alert" andBody:[object objectForKey:RESPONSE_MESSAGE] andDelegate:nil];
+        }
+        else{
+            if ([[object objectForKey:RESPONSE_MESSAGE] isKindOfClass:[NSDictionary class]]) {
+                
+                NSDictionary *dictResponse = [object objectForKey:RESPONSE_MESSAGE];
+                UserProfileBO *profileObj = [UserProfileBO sharedInstance];
+                
+                profileObj.userID =[dictResponse objectForKey:@"user_id"];
+                profileObj.emailID =[dictResponse objectForKey:@"email"];
+                profileObj.firstName =[dictResponse objectForKey:@"first_name"];
+                profileObj.lastName =[dictResponse objectForKey:@"second_name"];
+                profileObj.mobileNumber =[dictResponse objectForKey:@"mobile"];
+                profileObj.home_address =[dictResponse objectForKey:@"home_address"];
+                profileObj.work_address =[dictResponse objectForKey:@"work_address"];
+                profileObj.profileImageURL =[dictResponse objectForKey:@"profile_image"];
+
+                [self setUpMapDashboard];
+                
+            }
+        }
+        
     }
     else{
         [self showAlertViewWithTitle:@"Alert" andBody:[object objectForKey:RESPONSE_MESSAGE] andDelegate:nil];
@@ -120,9 +142,6 @@
 -(void)setUpMapDashboard
 {
 
-    
-//    APP_DELEGATE.navController = (UINavigationController*) APP_DELEGATE.window.rootViewController;
-    
     
     MapDashbaordViewController *frontViewController = [[MapDashbaordViewController alloc] init];
     RearViewController *rearViewController = [[RearViewController alloc] init];

@@ -75,6 +75,29 @@
     
 }
 
+-(void)fetchInviteCode{
+    
+    if(APP_DELEGATE.isServerReachable){
+        [DejalBezelActivityView activityViewForView:APP_DELEGATE.window withLabel:LOADER_MESSAGE];
+        
+        NSString *urlInviteCode = [NSString stringWithFormat:URL_GET_INVITE_CODE,[[UserProfileBO sharedInstance] userID]];
+        
+        ConnectionManager *requestManager = [[ConnectionManager alloc] init];
+        [requestManager hitWebServiceForURLWithPostBlock:NO webServiceURL:urlInviteCode andTag:REQUEST_GET_INVITE_CODE completionHandler:^(id object, REQUEST_TYPE tag, NSError *error) {
+            
+            if(object != nil){
+                [self performSelectorOnMainThread:@selector(responseSucceed:) withObject:object waitUntilDone:YES];
+            }
+            else{
+                [self performSelectorOnMainThread:@selector(responseFailed:) withObject:error waitUntilDone:YES];
+            }
+        }];
+    }
+        else{
+            [APP_DELEGATE noInternetConnectionAvailable];
+        }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
