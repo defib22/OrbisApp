@@ -8,6 +8,7 @@
 
 #import "ForgotPasswordViewController.h"
 #import "Constants.h"
+#import "ResetPasswordViewController.h"
 
 @interface ForgotPasswordViewController (){
 ConnectionManager *requestManager;
@@ -82,12 +83,16 @@ ConnectionManager *requestManager;
     
     if([[object objectForKey:RESPONSE_CODE] integerValue] == SUCCESS_STATUS_CODE_RESPONSE){
         
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        ResetPasswordViewController *vwController = [sb instantiateViewControllerWithIdentifier:@"ResetPassword"];
+        [self.navigationController pushViewController:vwController animated:YES];
+
     }
     else{
         [self showAlertViewWithTitle:@"Alert" andBody:[object objectForKey:RESPONSE_MESSAGE] andDelegate:nil];
     }
-    
 }
+
 
 -(void)responseFailed:(NSError*)error
 {
@@ -107,4 +112,8 @@ ConnectionManager *requestManager;
 }
 */
 
+- (IBAction)btnResetPasswordClicked:(id)sender {
+    
+    [self getForgotPasswordLink];
+}
 @end

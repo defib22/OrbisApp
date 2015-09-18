@@ -11,4 +11,9 @@
 @interface ForgotPasswordViewController : BaseViewController
 @property (weak, nonatomic) IBOutlet UITextField *txtFldEmail;
 
+
+@property (weak, nonatomic) IBOutlet UIButton *btnResetPassword;
+- (IBAction)btnResetPasswordClicked:(id)sender;
+
+
 @end

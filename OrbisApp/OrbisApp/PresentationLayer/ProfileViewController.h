@@ -9,5 +9,9 @@
 #import "BaseViewController.h"
 
 @interface ProfileViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource>
+{
+    UITextField *currentTextField;
+        ConnectionManager *requestManager;
+}
 
 @end

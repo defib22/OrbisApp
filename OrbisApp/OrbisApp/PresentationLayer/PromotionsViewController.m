@@ -46,8 +46,67 @@
 
 -(void)btnApplyClicked
 {
+    if(txtFldPromotions.text.length>0){
+    [self applyPromoCode];
+    }
+    else{
+        [self showAlertViewWithTitle:@"Alert" andBody:@"Please enter promo code." andDelegate:nil];
+    }
+}
+
+
+-(void)applyPromoCode{
+    
+    if(APP_DELEGATE.isServerReachable){
+        [DejalBezelActivityView activityViewForView:APP_DELEGATE.window withLabel:LOADER_MESSAGE];
+        
+        NSString *urlPromo = [NSString stringWithFormat:URL_APPLY_PROMO_CODE,txtFldPromotions.text];
+        
+        ConnectionManager *requestManager = [[ConnectionManager alloc] init];
+        [requestManager hitWebServiceForURLWithPostBlock:NO webServiceURL:urlPromo andTag:REQUEST_APPLY_PROMO_CODE completionHandler:^(id object, REQUEST_TYPE tag, NSError *error) {
+            
+            if(object != nil){
+                [self performSelectorOnMainThread:@selector(responseSucceed:) withObject:object waitUntilDone:YES];
+            }
+            else{
+                [self performSelectorOnMainThread:@selector(responseFailed:) withObject:error waitUntilDone:YES];
+            }
+        }];
+    }
+    else{
+        [APP_DELEGATE noInternetConnectionAvailable];
+    }
+}
+
+-(void)responseSucceed:(id)object
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    
+    if([[object objectForKey:RESPONSE_CODE] integerValue] == SUCCESS_STATUS_CODE_RESPONSE){
+        if ([[object objectForKey:RESPONSE_MESSAGE] isKindOfClass:[NSString class]]) {
+            [self showAlertViewWithTitle:@"Alert" andBody:[object objectForKey:RESPONSE_MESSAGE] andDelegate:nil];
+        }
+        else{
+            if ([[object objectForKey:RESPONSE_MESSAGE] isKindOfClass:[NSDictionary class]]) {
+                
+                NSDictionary *dictResponse = [object objectForKey:RESPONSE_MESSAGE];
+                [self showAlertViewWithTitle:@"Success" andBody:[dictResponse objectForKey:@"discountAmt"] andDelegate:nil];
+            }
+        }
+        
+    }
+    else{
+        [self showAlertViewWithTitle:@"Alert" andBody:[object objectForKey:ERROR_RESPONSE_MESSAGE] andDelegate:nil];
+    }
     
 }
+
+-(void)responseFailed:(NSError*)error
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    [self showAlertViewWithTitle:@"Error" andBody:error.localizedDescription ? error.localizedDescription : UNEXPECTED_ERROR_OCCURED andDelegate:nil];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

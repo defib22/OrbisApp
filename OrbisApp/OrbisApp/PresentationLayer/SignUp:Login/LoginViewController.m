@@ -114,10 +114,11 @@
                 profileObj.firstName =[dictResponse objectForKey:@"first_name"];
                 profileObj.lastName =[dictResponse objectForKey:@"second_name"];
                 profileObj.mobileNumber =[dictResponse objectForKey:@"mobile"];
-                profileObj.home_address =[dictResponse objectForKey:@"home_address"];
+                profileObj.password =[dictResponse objectForKey:@"password"];
+                 profileObj.home_address =[dictResponse objectForKey:@"home_address"];
                 profileObj.work_address =[dictResponse objectForKey:@"work_address"];
                 profileObj.profileImageURL =[dictResponse objectForKey:@"profile_image"];
-
+                
                 [self setUpMapDashboard];
                 
             }
@@ -125,7 +126,7 @@
         
     }
     else{
-        [self showAlertViewWithTitle:@"Alert" andBody:[object objectForKey:RESPONSE_MESSAGE] andDelegate:nil];
+        [self showAlertViewWithTitle:@"Alert" andBody:[object objectForKey:ERROR_RESPONSE_MESSAGE] andDelegate:nil];
     }
     
 }
@@ -157,6 +158,8 @@
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    [textField resignFirstResponder];
     return YES;
 }
 

@@ -718,7 +718,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="76P-e6-WSj" kind="push" id="Okm-yL-GVH"/>
+                                    <action selector="btnResetPasswordClicked:" destination="WAw-rL-vJW" eventType="touchUpInside" id="N84-lG-Yvu"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -742,6 +742,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="btnResetPassword" destination="iBX-x8-h9N" id="HGe-I0-3rg"/>
                         <outlet property="txtFldEmail" destination="sTr-hN-i8l" id="uhF-vb-6z7"/>
                     </connections>
                 </viewController>
@@ -752,7 +753,7 @@
         <!--ResetPasswordViewController-->
         <scene sceneID="J2K-Rl-bkV">
             <objects>
-                <viewController id="76P-e6-WSj" userLabel="ResetPasswordViewController" customClass="ResetPasswordViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResetPassword" useStoryboardIdentifierAsRestorationIdentifier="YES" id="76P-e6-WSj" userLabel="ResetPasswordViewController" customClass="ResetPasswordViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ITp-ee-WYe"/>
                         <viewControllerLayoutGuide type="bottom" id="oHO-cl-rjx"/>
@@ -761,7 +762,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.98000001907348633" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsS-bd-WO0">
+                            <view alpha="0.98000001907348633" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dsS-bd-WO0">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Check your email for instructions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E3N-hw-iS1">
@@ -770,7 +771,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLr-Q4-GjW">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLr-Q4-GjW">
                                         <rect key="frame" x="75" y="290" width="170" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="RLr-Q4-GjW" secondAttribute="height" multiplier="85:22" id="snC-Up-gjV"/>
@@ -784,7 +785,7 @@
                                             <action selector="btnResetPswdClicked:" destination="76P-e6-WSj" eventType="touchUpInside" id="1Yv-Dz-M6x"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password resent link sent." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nnX-t8-gLq">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Password resent link sent." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nnX-t8-gLq">
                                         <rect key="frame" x="35" y="125" width="250" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="nnX-t8-gLq" secondAttribute="height" multiplier="5:2" id="qqz-ts-2Le"/>
@@ -1615,6 +1616,12 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="bikeImageView" destination="EJw-mU-3iI" id="fZK-en-dfY"/>
+                        <outlet property="lblMinPrice" destination="ru1-KW-7Y1" id="Hnk-bK-qfv"/>
+                        <outlet property="lblOperation" destination="4r9-Tn-7qG" id="r4B-iq-ENr"/>
+                        <outlet property="lblPerMile" destination="SRX-aK-t1A" id="fMS-W5-jO1"/>
+                        <outlet property="lblPerMinute" destination="q1M-c7-5p9" id="Zvw-Zm-niI"/>
+                        <outlet property="lblPickupAmount" destination="WQ8-NY-im2" id="2JK-Z5-64e"/>
+                        <outlet property="lblShippingWeight" destination="XAr-8E-Yob" id="usK-qg-P2A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A6W-4V-MjN" userLabel="First Responder" sceneMemberID="firstResponder"/>

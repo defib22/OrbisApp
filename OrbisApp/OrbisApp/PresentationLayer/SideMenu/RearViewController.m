@@ -86,7 +86,7 @@
     CGFloat lblHeight = 50.0;
     
     UILabel *lblHello = [[UILabel alloc] initWithFrame:CGRectMake(70, yCord, CGRectGetWidth(vwHeader.frame) , lblHeight)];
-    lblHello.text = @"GARY STEVENS!";
+    lblHello.text = [[[UserProfileBO sharedInstance] firstName] uppercaseString];
     lblHello.textColor = [UIColor whiteColor];
     lblHello.font = FONT_TitilliumWeb_SemiBold(16.0);
     [vwHeader addSubview:lblHello];

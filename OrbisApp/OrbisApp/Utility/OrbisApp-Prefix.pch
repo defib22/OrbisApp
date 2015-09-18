@@ -53,9 +53,12 @@
 #define UNEXPECTED_ERROR_OCCURED @"Unexpected error occured. Please try after some time."
 
 
+//#define RESPONSE_CODE [@"status" uppercaseString]
 #define RESPONSE_CODE @"status"
+
 #define SUCCESS_STATUS_CODE_RESPONSE 200
-#define RESPONSE_MESSAGE @"Details"
+#define RESPONSE_MESSAGE @"data"
+#define ERROR_RESPONSE_MESSAGE @"message"
 
 
 #endif

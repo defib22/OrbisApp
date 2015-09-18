@@ -44,17 +44,16 @@ typedef enum {
 //#define URL_APPLY_PROMO_CODE @"applyPromoCode.php?promoCode=yuuyu"
 
 
-
-
+ 
 #define URL_LOGIN @"login.php?email=%@&password=%@"
 
-#define URL_FORGOT_PASSWORD @"forgotPassword.php?email=%@"
+#define URL_FORGOT_PASSWORD @"forgetpassword.php?email=%@"
 
 #define URL_CHANGE_PASSWORD @"changepassword.php?id=%@&old_password=%@&new_password=%@&confirm_password=%@"
 
-#define URL_SIGNUP @"newregistration.php?firstname=%@&lastname=%@&email=%@&password=%@&mobile=%@&fav_place=%@&home_address=%@&business_address=%@"
+#define URL_SIGNUP @"newregistration.php?firstname=%@&lastname=%@&email=%@&password=%@&mobile=%@&fav_place[]=%@&home_address[]=%@&business_address[]=%@"
 
-#define URL_UPDATE_USER @"newregistration.php?firstname=%@&lastname=%@&email=%@&password=%@&mobile=%@&fav_place=%@&home_address=%@&business_address=%@&id=%@"
+#define URL_UPDATE_USER @"newregistration.php?firstname=%@&lastname=%@&email=%@&password=%@&mobile=%@&fav_place[]=%@&home_address[]=%@&business_address[]=%@&id=%@"
 
 #define URL_GET_USER_PROFILE @"getUserProfileData.php?id=%@"
 

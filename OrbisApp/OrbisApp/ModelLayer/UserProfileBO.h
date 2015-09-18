@@ -12,6 +12,7 @@
 
 @property(nonatomic,strong) NSString *userID;
 @property(nonatomic,strong) NSString *emailID;
+@property(nonatomic,strong) NSString *password;
 @property(nonatomic,strong) NSString *firstName;
 @property(nonatomic,strong) NSString *lastName;
 @property(nonatomic,strong) NSString *mobileNumber;

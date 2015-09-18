@@ -10,4 +10,7 @@
 
 @interface InviteFriendsViewController : BaseViewController
 
+@property(nonatomic,strong)NSString *inviteCode;
+@property(nonatomic,strong)NSString *referalAmount;
+
 @end

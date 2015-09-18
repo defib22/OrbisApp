@@ -126,14 +126,15 @@
                 profileObj.work_address =[dictResponse objectForKey:@"work_address"];
                 profileObj.profileImageURL =[dictResponse objectForKey:@"profile_image"];
              
-                [self showAlertViewWithTitle:@"Success" andBody:@"You have successfully registered in the app.Please do login with your credentials to book the service." andDelegate:self];
+                [self showAlertViewWithTitle:@"ORBIS" andBody:[object objectForKey:ERROR_RESPONSE_MESSAGE] andDelegate:self];
+//                [self showAlertViewWithTitle:@"Success" andBody:@"You have successfully registered in the app.Please do login with your credentials to book the service." andDelegate:self];
 
             }
         }
         
     }
     else{
-        [self showAlertViewWithTitle:@"Alert" andBody:[object objectForKey:RESPONSE_MESSAGE] andDelegate:nil];
+        [self showAlertViewWithTitle:@"Alert" andBody:[object objectForKey:ERROR_RESPONSE_MESSAGE] andDelegate:nil];
     }
 }
 

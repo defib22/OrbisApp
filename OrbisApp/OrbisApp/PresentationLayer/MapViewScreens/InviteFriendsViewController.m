@@ -11,10 +11,12 @@
 @interface InviteFriendsViewController ()
 {
     UILabel *lblCode;
+    UILabel *lblHeader;
 }
 @end
 
 @implementation InviteFriendsViewController
+@synthesize inviteCode,referalAmount;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,13 +27,16 @@
 
 -(void)designInterface
 {
+    self.referalAmount = @"";
+    self.inviteCode = @"";
+    
     CGFloat xPos = 30;
     CGFloat width = CGRectGetWidth(self.view.frame) - 60;
     
     CGFloat yPos = 100;
     
-    UILabel *lblHeader = [[UILabel alloc] initWithFrame:CGRectMake(xPos, yPos, width, 50)];
-    lblHeader.text = @"Invite frineds and you will each get $10 credit when they make their first order.";
+    lblHeader = [[UILabel alloc] initWithFrame:CGRectMake(xPos, yPos, width, 50)];
+    lblHeader.text = [NSString stringWithFormat:@"Invite frineds and you will each get $%@ credit when they make their first order.",self.referalAmount];
     lblHeader.numberOfLines = 0;
     lblHeader.textColor = APP_TEXT_COLOR;
     lblHeader.backgroundColor = [UIColor clearColor];
@@ -43,7 +48,7 @@
     
     
     lblCode = [[UILabel alloc] initWithFrame:CGRectMake(xPos, yPos, width, 30)];
-    lblCode.text = @"Your Invite Code : US7348";
+    lblCode.text = [NSString stringWithFormat:@"Your Invite Code : %@",self.inviteCode];
     lblCode.textColor = APP_TEXT_COLOR;
     lblCode.textAlignment = NSTextAlignmentCenter;
     lblCode.backgroundColor = [UIColor clearColor];
@@ -68,6 +73,11 @@
         [self.view addSubview:btnShare];
         xPos+=width;
     }
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [self fetchInviteCode];
 }
 
 -(void)btnShareClicked:(UIButton*)btnSender
@@ -96,6 +106,41 @@
         else{
             [APP_DELEGATE noInternetConnectionAvailable];
         }
+}
+
+-(void)responseSucceed:(id)object
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    
+    if([[object objectForKey:RESPONSE_CODE] integerValue] == SUCCESS_STATUS_CODE_RESPONSE){
+        if ([[object objectForKey:RESPONSE_MESSAGE] isKindOfClass:[NSString class]]) {
+            [self showAlertViewWithTitle:@"Alert" andBody:[object objectForKey:RESPONSE_MESSAGE] andDelegate:nil];
+        }
+        else{
+            if ([[object objectForKey:RESPONSE_MESSAGE] isKindOfClass:[NSDictionary class]]) {
+                
+                NSDictionary *dictResponse = [object objectForKey:RESPONSE_MESSAGE];
+                
+                self.inviteCode = [dictResponse objectForKey:@"invite_code"];
+                self.referalAmount = [dictResponse objectForKey:@"amount"];
+
+                lblCode.text = [NSString stringWithFormat:@"Your Invite Code : %@",inviteCode];
+                lblHeader.text = [NSString stringWithFormat:@"Invite frineds and you will each get $%@ credit when they make their first order.",self.referalAmount];
+
+            }
+        }
+        
+    }
+    else{
+        [self showAlertViewWithTitle:@"Alert" andBody:[object objectForKey:ERROR_RESPONSE_MESSAGE] andDelegate:nil];
+    }
+    
+}
+
+-(void)responseFailed:(NSError*)error
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    [self showAlertViewWithTitle:@"Error" andBody:error.localizedDescription ? error.localizedDescription : UNEXPECTED_ERROR_OCCURED andDelegate:nil];
 }
 
 

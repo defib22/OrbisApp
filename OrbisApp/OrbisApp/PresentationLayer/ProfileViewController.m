@@ -31,6 +31,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    requestManager = [[ConnectionManager alloc] init];
+
     // Do any additional setup after loading the view.
     self.title = @"PROFILE";
     
@@ -39,6 +42,8 @@
     
     self.txtFldName.leftView = [self prepareLeftViewWithImage:@"top_profile_ic"];
     self.txtFldName.leftViewMode = UITextFieldViewModeAlways;
+    
+    self.txtFldName.background = [UIImage imageNamed:@""];
     
     self.txtFldMobileNo.leftView = [self prepareLeftViewWithImage:@"mobile_ic"];
     self.txtFldMobileNo.leftViewMode = UITextFieldViewModeAlways;
@@ -66,11 +71,13 @@
     
     self.navigationItem.rightBarButtonItem = revealButtonItem;
     
+    [self updateProfileData];
     //[self setUpRightBarButtonItemWithImageName:@"edit_ic" andActionType:PROFILE_ACTION];
 }
 
 -(void) editButtonClicked{
     
+    [self updateProfileInServer];
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
@@ -177,15 +184,184 @@
     return leftvwImage;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    return YES;
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+-(void)updateProfileData
+{
+    UserProfileBO *objUser = [UserProfileBO sharedInstance];
+    
+    self.txtFldName.text = objUser.firstName;
+    self.txtFldMobileNo.text = objUser.mobileNumber;
+    self.txtFldEmail.text = objUser.emailID;
+    self.txtFldPassword.text = objUser.password;
+}
+
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    currentTextField = textField;
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    currentTextField = textField;
+    [self updateValuesInObject];
+}
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    [self updateValuesInObject];
+    [textField resignFirstResponder];
+    return YES;
+}
+
+-(void)updateValuesInObject
+{
+    UserProfileBO *objUser = [UserProfileBO sharedInstance];
+    
+    if(currentTextField == self.txtFldName){
+        objUser.firstName = currentTextField.text;
+    }
+    else if(currentTextField == self.txtFldMobileNo){
+        objUser.mobileNumber = currentTextField.text;
+        
+    }
+    else if(currentTextField == self.txtFldEmail){
+        objUser.emailID = currentTextField.text;
+        
+    }
+    else if(currentTextField == self.txtFldPassword){
+        objUser.password = currentTextField.text;
+        
+    }
+}
+
+
+
+
+
+-(void)updateProfileInServer{
+    
+    if(self.txtFldEmail.text.length && self.txtFldName.text.length &&  self.txtFldMobileNo.text.length && self.txtFldPassword.text.length ){
+        
+        if(![self checkEmailValidationForText:self.txtFldEmail.text]){
+            [self showAlertViewWithTitle:nil andBody:@"Please enter valid email address." andDelegate:nil];
+            return;
+        }
+        
+        else if (self.txtFldPassword.text.length <6){
+            [self showAlertViewWithTitle:nil andBody:@"Password should be atleast 6 characters." andDelegate:nil];
+            return;
+        }
+        
+        
+        
+        if(APP_DELEGATE.isServerReachable){
+            
+            [DejalBezelActivityView activityViewForView:APP_DELEGATE.window withLabel:LOADER_MESSAGE];
+            
+            NSString *urlUpdateUser = [NSString stringWithFormat:URL_UPDATE_USER,self.txtFldName.text,self.txtFldName.text,self.txtFldEmail.text,self.txtFldPassword.text,self.txtFldMobileNo.text,@"fav place",@"home address",@"business address",[[UserProfileBO sharedInstance] userID]];
+            
+            [requestManager hitWebServiceForURLWithPostBlock:NO webServiceURL:urlUpdateUser andTag:REQUEST_UPDATE_USER completionHandler:^(id object, REQUEST_TYPE tag, NSError *error) {
+                
+                if(object != nil){
+                    [self performSelectorOnMainThread:@selector(responseSucceed:) withObject:object waitUntilDone:YES];
+                }
+                else{
+                    [self performSelectorOnMainThread:@selector(responseFailed:) withObject:error waitUntilDone:YES];
+                }
+            }];
+        }
+        else{
+            [APP_DELEGATE noInternetConnectionAvailable];
+        }
+    }
+    else{
+        [self showAlertViewWithTitle:nil andBody:@"Please enter all required fields" andDelegate:nil];
+        
+    }
+}
+
+-(void)responseSucceed:(id)object
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    
+    if([[object objectForKey:RESPONSE_CODE] integerValue] == SUCCESS_STATUS_CODE_RESPONSE){
+        if ([[object objectForKey:RESPONSE_MESSAGE] isKindOfClass:[NSString class]]) {
+            [self showAlertViewWithTitle:@"Alert" andBody:[object objectForKey:RESPONSE_MESSAGE] andDelegate:nil];
+        }
+        else{
+            if ([[object objectForKey:RESPONSE_MESSAGE] isKindOfClass:[NSDictionary class]]) {
+                
+                NSDictionary *dictResponse = [object objectForKey:RESPONSE_MESSAGE];
+                UserProfileBO *profileObj = [UserProfileBO sharedInstance];
+                
+                profileObj.userID =[dictResponse objectForKey:@"user_id"];
+                profileObj.emailID =[dictResponse objectForKey:@"email"];
+                profileObj.firstName =[dictResponse objectForKey:@"first_name"];
+                profileObj.lastName =[dictResponse objectForKey:@"second_name"];
+                profileObj.mobileNumber =[dictResponse objectForKey:@"mobile"];
+                profileObj.home_address =[dictResponse objectForKey:@"home_address"];
+                profileObj.work_address =[dictResponse objectForKey:@"work_address"];
+                profileObj.profileImageURL =[dictResponse objectForKey:@"profile_image"];
+                
+                [self showAlertViewWithTitle:@"ORBIS" andBody:[object objectForKey:ERROR_RESPONSE_MESSAGE] andDelegate:self];
+                
+            }
+        }
+        
+    }
+    else{
+        [self showAlertViewWithTitle:@"Alert" andBody:[object objectForKey:ERROR_RESPONSE_MESSAGE] andDelegate:nil];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+-(void)responseFailed:(NSError*)error
+{
+    [DejalBezelActivityView removeViewAnimated:YES];
+    [self showAlertViewWithTitle:@"Error" andBody:error.localizedDescription ? error.localizedDescription : UNEXPECTED_ERROR_OCCURED andDelegate:nil];
+}
+
+
+-(BOOL)checkEmailValidationForText:(NSString*)emailID
+{
+    NSString *emailEx =@"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailExPredicate =[NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailEx];
+    return  [emailExPredicate evaluateWithObject:emailID];
+}
+
+-(BOOL)isValidateMobileNumber:(NSString*)mobileNumber{
+    
+    BOOL isValidate = NO;
+    
+    NSString *phoneRegex = @"^[789]\\d{9}$";
+    NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
+    
+    if(mobileNumber.length == 10 && [phoneTest evaluateWithObject:mobileNumber] ){
+        isValidate = YES;
+    }
+    
+    return isValidate;
+}
+
+-(void)showAlertViewWithTitle:(NSString*)title andBody:(NSString*)body andDelegate:(id)delegate
+{
+    UIAlertView *alertVw = [[UIAlertView alloc] initWithTitle:title message:body delegate:delegate cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+    [alertVw show];
+    alertVw = nil;
+}
+
+
 
 
 /*
